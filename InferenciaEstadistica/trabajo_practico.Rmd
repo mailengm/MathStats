@@ -1,6 +1,6 @@
 ---
 title: "TP Simulacion -Inferencia Estadística"
-output: html_document
+output: rmarkdown::github_document
 date: "2023-06-10"
 ---
 
@@ -64,7 +64,7 @@ Finalmente $k'_{\alpha} = \chi^2_{2n, \alpha}$ y el test queda como
 rechazo_1 <- function(n, lambda, alpha){
   muestra <- rexp(n, rate=lambda)
   T_1 <- sum(muestra)
-  return(T_1 < qgamma(alpha, shape=n, rate=1/lambda))
+  return(2*lambda*T_1 < qgamma(alpha, shape=n, rate=1/lambda))
 }
 
 ```
