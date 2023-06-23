@@ -1,0 +1,24 @@
+# Trabajo práctico - Simulacion
+
+Ignacio Corres 
+Mailén Gómez Mayol
+
+Una fuente de radiación emite partículas alfa qude acuerdo con un proceso de Poisson de intensidad $\lambda$ por segundo. Se tiene una fuerte sospecha de que el parámetro desconocido supera 0.5, y con el objetivo de confirmar dicha sospecha se medirán los tiempos entre emisiones consecutivas, obteniendo de esa manera una muestra de variables aleatorias independientes con distribución $\text{Exp}(\lambda)$
+
+Se proponen dos alternativas, con respecto a la construcción del test de hipótesis:
+
+1. Armar un test de nivel exacto $\alpha$ a partir del estadístico $T_1=\sum_{i=1}^n X_i$
+
+2. Armar un test de nivel $\alpha$ asintótico a partir del estadístico  $T_2=\sqrt{n}\frac{\bar{X}-2}{2}$
+
+El objetivo es comparar ambos métodos mediante una simulación en R para luego elegir uno de ellos y realizar el experiemnto. Para cada valor de $n \in \{10, 30, 100, 1000\} se quiere estimar el nivel empírico, y compararlo para las dos alternativas propuestas. También se desea aproximar y graficar la función potencia y comparar.
+
+Consideramos lo siguiente:
+
+- Generar una muestra de tamaño $n$ de una distribución $\text{Exp}(1/2)$
+
+```{r}
+lambda = 0.5 
+n = 10
+muestra <- rexp(n, rate=lambda)
+```
