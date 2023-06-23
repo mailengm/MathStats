@@ -84,3 +84,4 @@ alpha_test <- mean(simulaciones_rechazo)
 print(alpha_test)
 ```
 
+
