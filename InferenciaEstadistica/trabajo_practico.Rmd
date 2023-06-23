@@ -1,7 +1,12 @@
+---
+title: "TP Simulacion -Inferencia Estadística"
+output: html_document
+date: "2023-06-10"
+---
+
+
 # Trabajo práctico - Simulacion
 
-Ignacio Corres 
-Mailén Gómez Mayol
 
 Una fuente de radiación emite partículas alfa qude acuerdo con un proceso de Poisson de intensidad $\lambda$ por segundo. Se tiene una fuerte sospecha de que el parámetro desconocido supera 0.5, y con el objetivo de confirmar dicha sospecha se medirán los tiempos entre emisiones consecutivas, obteniendo de esa manera una muestra de variables aleatorias independientes con distribución $\text{Exp}(\lambda)$
 
@@ -13,12 +18,69 @@ Se proponen dos alternativas, con respecto a la construcción del test de hipót
 
 El objetivo es comparar ambos métodos mediante una simulación en R para luego elegir uno de ellos y realizar el experiemnto. Para cada valor de $n \in \{10, 30, 100, 1000\} se quiere estimar el nivel empírico, y compararlo para las dos alternativas propuestas. También se desea aproximar y graficar la función potencia y comparar.
 
-Consideramos lo siguiente:
+## Test exacto
 
-- Generar una muestra de tamaño $n$ de una distribución $\text{Exp}(1/2)$
+$X_1, \ldots, X_n$ muestra aleatoria con densidad $f_\lambda (x) = \lambda e^{-\lambda x}$ 
 
-```{r}
-lambda = 0.5 
-n = 10
-muestra <- rexp(n, rate=lambda)
+Proponemos un test UMP con
+
+$$ H_0: \lambda \leq 0.5 $$
+$$ H_1: \lambda > 0.5 $$
+
+De la definición de $f_\lambda(x)$ tenemos que $c(\lambda)= - \lambda$ es una función decreciente. Por lo tanto el test queda definido como
+
+\[
+    \delta (\mathbf{X})=
+\begin{cases}
+1 & \text{si }-\sum_{i=1}^nX_i \geq k_\alpha \\
+0 & \text{si no}
+\end{cases}
+\]
+
+Nos falta definir $k_\lambda$. Para eso buscamos $\alpha$ tal que $P_{\lambda=0.5}\left(-\sum_{i=1}^n X_i \geq k_\lambda\right)$.
+
+Sabemos que $\sum_{i=1}^n X_i \sim \Gamma(n, 1/\lambda)$. Por lo tanto podemos definir
+
+$$ 2\lambda \sum_{i=1}^n X_i \sim \Gamma(n, 2) = \chi^2_{2n} $$
+
+Por lo tanto,
+
+$$ P_{\lambda=0.5}\left( 2\lambda \sum_{i=1}^n X_i \leq 2\lambda k_\alpha\right) = P(U \leq k'_\alpha) = \alpha $$
+
+
+con $U = 2 \lambda \sum_{i=1}^n X_i \sim \chi^2_{2n}$.
+
+Finalmente $k'_{\alpha} = \chi^2_{2n, \alpha}$ y el test queda como
+
+\[
+    \delta (\mathbf{X})=
+\begin{cases}
+1 & \text{si }2\lambda\sum_{i=1}^nX_i \leq \chi^2_{2n, \alpha} \\
+0 & \text{si no}
+\end{cases}
+\]
+
+```{r rechazo}
+rechazo_1 <- function(n, lambda, alpha){
+  muestra <- rexp(n, rate=lambda)
+  T_1 <- sum(muestra)
+  return(T_1 < qgamma(alpha, shape=n, rate=1/lambda))
+}
+
 ```
+
+```{r simulacion_rechazo}
+#Datos
+Nrep = 10000
+n = 30
+lambda = 0.5
+alpha = 0.05
+
+#Simulacion
+simulaciones_rechazo <- replicate(Nrep, rechazo_1(n, lambda, alpha))
+
+# Alpha queda
+alpha_test <- mean(simulaciones_rechazo)
+print(alpha_test)
+```
+
