@@ -195,6 +195,5 @@ ggplot(potencias, aes(x=grilla_lambdas)) +
   geom_hline(yintercept = 0.05)+
   annotate("text", x=0, y=0.07, label=alpha_text, hjust=0, size = 5, parse = TRUE)
 
-
 ```
 
