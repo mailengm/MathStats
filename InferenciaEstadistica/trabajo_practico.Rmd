@@ -16,7 +16,7 @@ Se proponen dos alternativas, con respecto a la construcción del test de hipót
 
 2. Armar un test de nivel $\alpha$ asintótico a partir del estadístico  $T_2=\sqrt{n}\frac{\bar{X}-2}{2}$
 
-El objetivo es comparar ambos métodos mediante una simulación en R para luego elegir uno de ellos y realizar el experiemnto. Para cada valor de $n \in \{10, 30, 100, 1000\} se quiere estimar el nivel empírico, y compararlo para las dos alternativas propuestas. También se desea aproximar y graficar la función potencia y comparar.
+El objetivo es comparar ambos métodos mediante una simulación en R para luego elegir uno de ellos y realizar el experiemnto. Para cada valor de $n \in \{10, 30, 100, 1000\}$ se quiere estimar el nivel empírico, y compararlo para las dos alternativas propuestas. También se desea aproximar y graficar la función potencia y comparar.
 
 ## Test de hipótesis
 
@@ -118,10 +118,10 @@ con $-k_\alpha = z_\alpha$ y el test asintótico queda como
 
 ```{r sim-rechazo_asintotico}
 
-rechazo_asintotico <- function(n, lambda, alpha) {
+rechazo_asintotico <- function(n, lambda, alpha, lambda0=0.5) {
   muestra <- rexp(n, rate = lambda)
-  mu <- n/lambda
-  var <- sqrt(n/lambda^2)
+  mu <- n/lambda0
+  var <- sqrt(n/lambda0^2)
   T_2 <- (sum(muestra)-mu)/var
   return(T_2 < qnorm(alpha))
 }
@@ -145,7 +145,7 @@ for (i in seq_along(sample_sizes)) {
 
 ### Comparación de ambos métodos
 
-```{r comparacion, results='asis', echo = FALSE }
+```{r comparacion-alpha-empirico, results='asis', echo = FALSE }
 library(knitr)
 alphas <- data.frame(n = sample_sizes, exacto = alphas_exacto, asintotico = alphas_asintotico)
 
@@ -156,8 +156,8 @@ kable(alphas,caption = "Comparación de niveles empíricos para ambos métodos "
 ### Función de potencia para $n=100$
 
 
-```{r}
-n = 10
+```{r calculo-potencia}
+n = 100
 
 grilla_lambdas <- seq(0.01, 1, length.out = 100)
 
@@ -176,18 +176,25 @@ for (i in seq_along(grilla_lambdas)) {
 }
 ```
 
-```{r, echo = F}
+```{r grafico-potencia, echo = F}
 library(ggplot2)
+library(latex2exp)
+
 potencias = data.frame(lambda=grilla_lambdas, exacto = potencia_exacto, asintotico=potencia_asintotico)
 
+titulo <- paste("Comparación de función de potencias con n =", 100, sep=" ")
+alpha_text <- TeX("$\\alpha$ = 0.05", output = "character")
+lambda_text <- TeX("$\\lambda$")
 
 ggplot(potencias, aes(x=grilla_lambdas)) +
-  geom_line(aes(y=exacto, color = "exacto"), linewidth=2)+
-  geom_line(aes(y=asintotico, color = "asintotico"), linewidth=2)+
-  ggtitle("Comparación de función de potencias") +
-  labs(x="Lambda",y="Potencia",color="Test") +
-    scale_color_manual(values=c("darkred","steelblue"))
-  
+  geom_line(aes(y=exacto, color = "exacto"), linewidth=1)+
+  geom_line(aes(y=asintotico, color = "asintotico"), linewidth=1)+
+  ggtitle(titulo) +
+  labs(x=lambda_text,y="Potencia",color="Test") +
+  scale_color_manual(values=c("darkred","steelblue")) +
+  geom_hline(yintercept = 0.05)+
+  annotate("text", x=0, y=0.07, label=alpha_text, hjust=0, size = 5, parse = TRUE)
+
 
 ```
 
