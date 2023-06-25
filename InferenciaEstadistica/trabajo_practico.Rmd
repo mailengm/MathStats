@@ -18,11 +18,11 @@ Se proponen dos alternativas, con respecto a la construcción del test de hipót
 
 El objetivo es comparar ambos métodos mediante una simulación en R para luego elegir uno de ellos y realizar el experiemnto. Para cada valor de $n \in \{10, 30, 100, 1000\} se quiere estimar el nivel empírico, y compararlo para las dos alternativas propuestas. También se desea aproximar y graficar la función potencia y comparar.
 
-## Test exacto
+## Test de hipótesis
 
 $X_1, \ldots, X_n$ muestra aleatoria con densidad $f_\lambda (x) = \lambda e^{-\lambda x}$ 
 
-Proponemos un test UMP con
+Proponemos un test de hipótesis con
 
 $$ H_0: \lambda \leq 0.5 $$
 $$ H_1: \lambda > 0.5 $$
@@ -37,51 +37,157 @@ De la definición de $f_\lambda(x)$ tenemos que $c(\lambda)= - \lambda$ es una f
 \end{cases}
 \]
 
-Nos falta definir $k_\lambda$. Para eso buscamos $\alpha$ tal que $P_{\lambda=0.5}\left(-\sum_{i=1}^n X_i \geq k_\lambda\right)$.
+Nos falta definir $k_\alpha$. Llegamos a una bifurcación: podemos elegir ir por el camino exacto y encontrar la distribución del estadístico; o podemos ir por el camino asintótico y aplicar TCL. Hacemos los dos.
 
-Sabemos que $\sum_{i=1}^n X_i \sim \Gamma(n, 1/\lambda)$. Por lo tanto podemos definir
+### Test UMP 
 
-$$ 2\lambda \sum_{i=1}^n X_i \sim \Gamma(n, 2) = \chi^2_{2n} $$
+Decidimos ir por el camino exacto así que tenemos que encontrar $k_\alpha$ tal que $P_{\lambda=0.5}\left(-\sum_{i=1}^n X_i \geq k_\alpha\right)=\alpha$.
+
+Sabemos que $\sum_{i=1}^n X_i \sim \Gamma(n, \lambda)$. Como $\lambda = 1/2$ $\sum_{i=1}^n X_i \sim \chi^2_{2n}$
 
 Por lo tanto,
 
-$$ P_{\lambda=0.5}\left( 2\lambda \sum_{i=1}^n X_i \leq 2\lambda k_\alpha\right) = P(U \leq k'_\alpha) = \alpha $$
+$$ P_{\lambda=0.5}\left( \sum_{i=1}^n X_i \leq -k_\alpha\right) = P(U \leq k'_\alpha) = \alpha $$
 
 
-con $U = 2 \lambda \sum_{i=1}^n X_i \sim \chi^2_{2n}$.
+con $U = \sum_{i=1}^n X_i \sim \chi_{2n}$.
 
 Finalmente $k'_{\alpha} = \chi^2_{2n, \alpha}$ y el test queda como
 
 \[
     \delta (\mathbf{X})=
 \begin{cases}
-1 & \text{si }2\lambda\sum_{i=1}^nX_i \leq \chi^2_{2n, \alpha} \\
+1 & \text{si } \sum_{i=1}^nX_i \leq \chi_{2n, \alpha} \\
 0 & \text{si no}
 \end{cases}
 \]
 
-```{r rechazo}
-rechazo_1 <- function(n, lambda, alpha){
-  muestra <- rexp(n, rate=lambda)
+```{r sim-rechazo_exacto}
+
+rechazo_exacto <- function(n, lambda, alpha) {
+  muestra <- rexp(n, rate = lambda)
   T_1 <- sum(muestra)
-  return(2*lambda*T_1 < qchisq(alpha, shape=2*n, rate=1/lambda))
+  return(T_1 < qchisq(alpha, 2 * n))
+}
+
+# Simulation
+N_replications <- 10000
+sample_sizes <- c(10, 30, 100, 1000)
+lambda <- 0.5
+alpha <- 0.05
+
+alphas_exacto <- numeric(length(sample_sizes))
+
+for (i in seq_along(sample_sizes)) {
+  n <- sample_sizes[i]
+  simulaciones_rechazo <- replicate(N_replications, rechazo_exacto(n, lambda, alpha))
+  alpha_test <- mean(simulaciones_rechazo)
+  alphas_exacto[i] <- alpha_test
 }
 
 ```
 
-```{r simulacion_rechazo}
-#Datos
-Nrep = 10000
-n = 30
-lambda = 0.5
-alpha = 0.05
 
-#Simulacion
-simulaciones_rechazo <- replicate(Nrep, rechazo_1(n, lambda, alpha))
+### Test asintótico
 
-# Alpha queda
-alpha_test <- mean(simulaciones_rechazo)
-print(alpha_test)
+Si optamos por un test asintótico vamos a buscar un $k_\alpha$ tal que $P_{\lambda=0.5}\left(-\sum_{i=1}^n X_i \geq k_\alpha\right)\xrightarrow{n\rightarrow\infty}\alpha$.
+
+Para encontrar esta probabilidad vamos a aplicar TCL, lo podemos hacer porque el estadístico es una suma de variables aleatorias. Antes de aplicar TCL nos conviene tener calculadas la esperanza y la varianza. 
+
+$$\text{E}\left[\sum_{i=1}^n X_i\right]=n/\lambda$$
+$$\text{Var}\left[\sum_{i=1}^n X_i\right] = n/\lambda^2$$
+
+Entonces, si $\lambda=\lambda_0$ por TCL tenemos que 
+
+$$\frac{\sum_{i=1}^n X_i-n/\lambda_0}{\sqrt{n/\lambda_0^2}}\xrightarrow{\mathcal{D}}\mathcal{N}(0,1)$$
+
+Finalmente, con $n\rightarrow\infty$ 
+
+$$P\left(\frac{\sum_{i=1}^n X_i-n/\lambda_0}{\sqrt{n/\lambda_0^2}}\leq -k_\alpha\right)\approx\phi(-k_\alpha)$$
+
+con $-k_\alpha = z_\alpha$ y el test asintótico queda como
+
+\[
+    \delta (\mathbf{X})=
+\begin{cases}
+1 & \text{si } \frac{\sum_{i=1}^n X_i-n/\lambda_0}{\sqrt{n/\lambda_0^2}} \leq z_\alpha \\
+0 & \text{si no}
+\end{cases}
+\]
+
+
+```{r sim-rechazo_asintotico}
+
+rechazo_asintotico <- function(n, lambda, alpha) {
+  muestra <- rexp(n, rate = lambda)
+  mu <- n/lambda
+  var <- sqrt(n/lambda^2)
+  T_2 <- (sum(muestra)-mu)/var
+  return(T_2 < qnorm(alpha))
+}
+
+# Simulation
+N_replications <- 10000
+sample_sizes <- c(10, 30, 100, 1000)
+lambda <- 0.5
+alpha <- 0.05
+
+alphas_asintotico <- numeric(length(sample_sizes))
+
+for (i in seq_along(sample_sizes)) {
+  n <- sample_sizes[i]
+  simulaciones_rechazo_asintotico <- replicate(N_replications, rechazo_asintotico(n, lambda, alpha))
+  alpha_test_asintotico <- mean(simulaciones_rechazo_asintotico)
+  alphas_asintotico[i] <- alpha_test_asintotico
+}
+
 ```
 
+### Comparación de ambos métodos
+
+```{r comparacion, results='asis', echo = FALSE }
+library(knitr)
+alphas <- data.frame(n = sample_sizes, exacto = alphas_exacto, asintotico = alphas_asintotico)
+
+kable(alphas,caption = "Comparación de niveles empíricos para ambos métodos ")
+
+```
+
+### Función de potencia para $n=100$
+
+
+```{r}
+n = 10
+
+grilla_lambdas <- seq(0.01, 1, length.out = 100)
+
+potencia_exacto  <- numeric(length(grilla_lambdas))
+potencia_asintotico  <- numeric(length(grilla_lambdas))
+
+for (i in seq_along(grilla_lambdas)) {
+ lambda <- grilla_lambdas[i]
+    simulaciones_rechazo_exacto <- replicate(N_replications, rechazo_exacto(n, lambda, alpha))
+  alpha_test_exacto <- mean(simulaciones_rechazo_exacto)
+  potencia_exacto[i] <- alpha_test_exacto
+
+  simulaciones_rechazo_asintotico <- replicate(N_replications, rechazo_asintotico(n, lambda, alpha))
+  alpha_test_asintotico <- mean(simulaciones_rechazo_asintotico)
+  potencia_asintotico[i] <- alpha_test_asintotico
+}
+```
+
+```{r, echo = F}
+library(ggplot2)
+potencias = data.frame(lambda=grilla_lambdas, exacto = potencia_exacto, asintotico=potencia_asintotico)
+
+
+ggplot(potencias, aes(x=grilla_lambdas)) +
+  geom_line(aes(y=exacto, color = "exacto"), size=2)+
+  geom_line(aes(y=asintotico, color = "asintotico"), size=2)+
+  ggtitle("Comparación de función de potencias") +
+  labs(x="Lambda",y="Potencia",color="Test") +
+    scale_color_manual(values=c("darkred","steelblue"))
+  
+
+```
 
