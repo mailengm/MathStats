@@ -1,6 +1,6 @@
 ```{r}
-sujetos = 127
-curados = 60
+sujetos = 120
+curados = 33
 
 nivel = 0.99
 
@@ -16,8 +16,10 @@ print(c(L, R))
 
 ```
 
+para este punto p depende de n, entonces tomo el p que maximiza la varianza. Con $p=0.5$ el n necesario es $n_{opt} > \left(frac{z}{\mathcal{L}}\right)$
+
 ```{r}
-l = 0.08
-n_opt <- p*(1-p)*(2*z/l)^2
+l = 0.06
+n_opt <- ceiling((z/l)^2)
 print(n_opt)
 ```
