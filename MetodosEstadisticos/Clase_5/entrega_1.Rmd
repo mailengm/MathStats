@@ -1,0 +1,27 @@
+
+```{r}
+datos_A <- scan()
+```
+
+```{r}
+datos_B <- scan()
+```
+
+```{r}
+nivel = 0.91
+alpha <- 1-nivel
+
+media_A <- mean(datos_A)
+media_B <- mean(datos_B)
+sigma2 <- (var(datos_A)+var(datos_B))/2
+
+n_A <-length(datos_A)
+n_B <- length(datos_B)
+
+z <- qt(1-alpha/2,df=n_A +n_B-2)
+
+left <- media_A - media_B - z * sqrt(sigma2*(1/n_A + 1/n_B))
+right <- media_A - media_B + z * sqrt(sigma2*(1/n_A + 1/n_B))
+
+print(c(left, right))
+```

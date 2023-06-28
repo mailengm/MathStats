@@ -1,0 +1,30 @@
+
+```{r}
+datos <- scan()
+```
+
+```{r A}
+tiempo <- mean(datos)
+print(tiempo)
+```
+
+```{r B}
+tiempo_esperado <- 19
+proba <- 1-exp(-tiempo_esperado/mean(datos))
+print(proba)
+```
+
+```{r C}
+proba_esperada <- 0.73
+
+tiempo_estimado <- -log(proba_esperada)*mean(datos)
+print(tiempo_estimado)
+```
+
+```{r D}
+library(MASS)
+
+lambda_no_parametrico <- f itdistr(datos,"exponential")
+
+lambda_no_parametrico$rate / (1/27)
+```

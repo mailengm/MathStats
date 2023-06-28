@@ -1,0 +1,133 @@
+## Ejercicio 1
+
+### A
+```{r}
+datos <- scan()
+```
+
+```{r}
+n <- length(datos)
+s <- 0.7
+mu_n <- mean(datos)
+alpha <- 0.93
+q <- qnorm((1-alpha)/2)
+
+a <- mu_n - q*sqrt(s/n)
+b <- mu_n + q*sqrt(s/n)
+
+print(paste("[", round(a,4), ", ", round(b,4), "]"))
+```
+
+### B 
+
+```{r}
+delta = 0.1
+
+n_opt <- (2*q*sqrt(s)/delta)^2
+print(n_opt)
+```
+
+## Ejercicio 2
+
+```{r}
+intervalo_mu_exacto <- function(nivel, sd, datos){
+    n <- length(datos)
+    mu_n <- mean(datos)
+    q <- -qnorm((1-nivel)/2)
+    s <- sd/sqrt(n)
+
+    a_lower <- mu_n - q * s
+    b_upper <- mu_n + q * s
+
+    return(a_lower, b_upper)
+}
+```
+
+```{r}
+intervalo_mu_exacto <- function(nivel, sd=NULL, datos){
+    n <- length(datos)
+    mu_n <- mean(datos)
+    alpha <- 1-nivel
+    if (is.null(sd)){
+        S <- var(datos)
+        q <- qt(1-alpha/2, df=n-1)
+        a_lower <- mu_n - q * S/sqrt(n)
+        b_upper <- mu_n + q * S/sqrt(n)
+    } else {
+        q <- qnorm(1-nivel/2)
+        s <- sd/sqrt(n)
+
+        a_lower <- mu_n - q * s
+        b_upper <- mu_n + q * s
+    }
+    
+    return (c(a_lower, b_upper))
+}
+```
+
+```{r}
+intervalo_mu_exacto(0.95, datos=datos)
+```
+
+
+## Ejercicio 9
+
+```{r}
+datos <- scan()#c(1.52, 1.65, 1.72, 1.65, 1.72, 1.83, 1.62, 1.75, 1.72, 1.68, 1.51, 1.65, 1.58, 1.65, 1.62, 1.70, 1.60, 1.73, 1.61, 1.52, 1.81, 1.72, 1.50, 1.82, 1.65)
+```
+
+### A. Intervalo de confianza de nivel 0.95
+
+```{r}
+#intervalo_mu_exacto(0.05, datos=datos)
+nivel = 0.9
+n <- length(datos)
+mu_n <- mean(datos)
+alpha <- 0.9
+
+S <- var(datos)
+q <- qt((1-alpha)/2, df=n-1)
+a <- mu_n - q * sqrt(S/n)
+b <- mu_n + q * sqrt(S/n)
+
+a
+b
+```
+1.6226 1.6998
+
+### B. Intervalo de confianza de nivel 0.90 para sigma
+
+```{r}
+n <- length(datos)
+nivel <- 0.1
+qa <- qchisq(1-nivel/2, df=n-1)
+qb <- qchisq(nivel/2, df=n-1)
+
+a_lower <- (n-1)*var(datos)/qa
+b_upper <- (n-1)*var(datos)/qb
+
+print(c(a_lower, b_upper))
+```
+
+## Entrega 3
+
+```{r}
+datos <- scan()
+```
+
+```{r}
+
+nivel <- 0.94
+alpha <- 1-nivel
+n <-length(datos)
+suma <-2* sum(datos)
+q_a <-qchisq(alpha/2, 2*n)
+q_b <-qchisq(1-alpha/2, 2*n)
+a <- q_a/suma
+b <- q_b/suma
+a
+b
+1/a
+1/b
+
+```

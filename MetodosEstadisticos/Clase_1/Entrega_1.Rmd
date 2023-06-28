@@ -1,0 +1,17 @@
+
+```{r}
+setwd("/home/mailen/Documents/MEM/MetodosEstadisticos/Clase_1")
+```
+
+```{r}
+pdf(file="MailenGM.pdf")
+data <- read.csv("data.csv", header=F)
+boxplot(data, main= "Boxplot paralelos")
+
+nombres = c("n = 5", "n = 10", "n = 100", "n = 1000")
+par(mfrow=c(ncol(data), 1))
+for (i in 1:ncol(data)){
+    hist(data[,i], freq=F, main=nombres[i], xlim=c(0, 0.45), xlab="p")
+}
+dev.off() 
+```

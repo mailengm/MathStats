@@ -1,0 +1,38 @@
+
+
+```{r}
+set.seed(242)
+n <- 5; Nrep <- 10000
+mu_true <- 70
+atrapado <- rep(NA, Nrep)
+
+for (i in 1:Nrep){
+    datos <- rnorm(n, mean=mu_true, sd= 2)
+    promedio <- mean(datos)
+    a <- promedio - 1.96 *sqrt(4/n)
+    b <- promedio + 1.96 * sqrt(4/n)
+    atrapado[i] <- a <mu_true & mu_true < b
+}
+
+mean(atrapado)
+```
+
+```{r}
+set.seed(242)
+n <- 5; Nrep <- 10000
+mu_true <- 70
+atrapado <- rep(NA, Nrep)
+
+for (i in 1:Nrep){
+    datos <- rnorm(n, mean=mu_true, sd= 2)
+    promedio <- mean(datos)
+    a <- promedio - 1.96 *sqrt(4/n)
+    b <- promedio + 1.96 * sqrt(4/n)
+    atrapado[i] <- a <mu_true & mu_true < b
+}
+
+mean(atrapado)
+
+
+
+```

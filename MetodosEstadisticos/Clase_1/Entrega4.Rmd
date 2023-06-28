@@ -1,0 +1,163 @@
+---
+title: "Clase 1 - Entrega 4"
+author: Mailén Gómez Mayol
+output:
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "seahorse"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+setwd("/home/mailen/Documents/MEM/MetodosEstadisticos/Clase_1")
+```
+
+# Ejercicio 7: Simulación bajo el modelo uniforme $U[0,\theta]$
+
+
+## A.
+```{r}
+est1_unif <-function(datos){
+    return(mean(datos)*2)
+}
+
+
+histograma_est1_unif<-function(tetha,n,Nrep, seed=3487){
+  set.seed(seed)
+  estimaciones <- c() 
+  for (i in 1:Nrep){
+    datos <-runif(n, 0, theta)
+    estimacion <- est1_unif(datos)
+    estimaciones <- c(estimaciones, estimacion)
+  }
+  hist(estimaciones, main=paste ("estimaciones est1- theta =", theta, " n =", n, " Nrep =", Nrep))
+}
+```
+
+
+## B. Estimaciones para est1
+```{r}
+est2_unif <-function(datos){
+    return(max(datos))
+}
+
+histograma_est2_unif<-function(tetha,n,Nrep, seed=3487){
+  set.seed(seed)
+  estimaciones <- c() 
+  for (i in 1:Nrep){
+    datos <-runif(n, 0, theta)
+    estimacion <- est2_unif(datos)
+    estimaciones <- c(estimaciones, estimacion)
+  }
+  hist(estimaciones, main=paste ("estimaciones est2- theta =", theta, " n =", n, " Nrep =", Nrep))
+}
+```
+
+## C.
+```{r hist1}
+ns = c(5, 30, 50, 100, 1000)
+seed = 5740
+Nrep = 1000
+theta = 3
+
+par(mfrow=c(3, 2))
+for (n in ns){
+  histograma_est1_unif(tetha, n, Nrep, seed)
+}
+```
+
+## C.Estimaciones para est2
+```{r hist2}
+ns = c(5, 30, 50, 100, 1000)
+seed = 5740
+Nrep = 1000
+theta = 3
+
+par(mfrow=c(3, 2))
+for (n in ns){
+  histograma_est2_unif(tetha, n, Nrep, seed)
+}
+```
+
+## D. Error cuadrático medio empírico
+
+```{r}
+
+MSE_1 <-function(tetha, n, Nrep, seed){
+  set.seed(seed)
+  estimaciones <- c() 
+  for (i in 1:Nrep){
+    datos <-runif(n, 0, theta)
+    estimacion <- est1_unif(datos)
+    estimaciones <- c(estimaciones, estimacion)
+  }
+  return(mean((estimaciones - theta)^2))
+}
+
+MSE_2 <-function(tetha, n, Nrep, seed){
+  set.seed(seed)
+  estimaciones <- c() 
+  for (i in 1:Nrep){
+    datos <-runif(n, 0, theta)
+    estimacion <- est2_unif(datos)
+    estimaciones <- c(estimaciones, estimacion)
+  }
+  return(mean((estimaciones - theta)^2))
+}
+```
+
+
+```{r}
+ns = c(5, 30, 50, 100, 1000)
+seed = 5740
+Nrep = 1000
+theta = 3
+
+mse_1 <- c()
+mse_2 <- c()
+for (n in ns){
+ mse_1 <-c(mse_1, MSE_1(tetha, n, Nrep, seed))
+ mse_2 <-c(mse_2, MSE_2(tetha, n, Nrep, seed))
+}
+
+```
+
+## E. ECM teórico
+```{r}
+MSE1_teorico <- function(theta, n){
+  return((theta^2)/n)
+}
+
+MSE2_teorico <- function(theta, n){
+  factor <- 2/((n+1)*(n+2))
+  return((theta^2)*factor)
+}
+```
+
+```{r}
+
+mset_1 <- c()
+mset_2 <- c()
+for (n in ns){
+ mset_1 <-c(mset_1, MSE1_teorico(theta, n))
+ mset_2 <-c(mset_2, MSE2_teorico(theta, n))
+}
+```
+
+## E. MSE estimado y teórico
+```{r}
+
+mse_est1 <- cbind(ns, mse_1, mset_1)
+colnames(mse_est1) <- c("n", "MSE estimado", "MSE teorico") 
+mse_est2 <- cbind(ns, mse_2, mset_2)
+colnames(mse_est2) <- c("n", "MSE estimado", "MSE teorico") 
+```
+
+```{r mse1}
+library(knitr)
+kable(mse_est1, caption = "MSE del estimador 1")
+```
+---
+```{r mse2}
+kable(mse_est2, caption = "MSE del estimador 2")
+```

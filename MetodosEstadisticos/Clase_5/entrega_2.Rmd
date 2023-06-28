@@ -1,0 +1,23 @@
+```{r}
+sujetos = 127
+curados = 60
+
+nivel = 0.99
+
+alpha <- 1-nivel
+z <- qnorm(1-alpha/2)
+
+p <- curados/sujetos
+
+L <- round(p - z * sqrt(p*(1-p)/sujetos), 4)
+R <- round(p + z * sqrt(p*(1-p)/sujetos), 4)
+
+print(c(L, R))
+
+```
+
+```{r}
+l = 0.08
+n_opt <- p*(1-p)*(2*z/l)^2
+print(n_opt)
+```
