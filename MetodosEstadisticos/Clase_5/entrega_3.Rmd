@@ -1,0 +1,69 @@
+---
+title: "Document"
+author: "User"
+date: "`Sys.Date()`"
+output: html_document
+---
+
+# Ejercicio 8
+```{r imports, include=F}
+
+library(dplyr)
+library(tidyr)
+library(knitr)
+
+knitr::opts_chunk$set(echo=T)
+
+```
+
+
+
+## A.
+
+```{r estimar-ic-p}
+estimar_p_intervalo <- function(nivel, datos, p, metodo=1){
+    alpha <- 1-nivel
+    mu <- mean(datos)
+    z <- qnorm(1-alpha/2)
+    n <- length(datos)
+
+    var <- mu*(1-mu)
+
+    if (metodo == 1) {
+        ic <- c(mu-z*var/n, mu+z*var/n) 
+    } else {
+        a <- n^2 + n*Z^2
+        b <- -2*n*sum(x) - Z^2*n
+        c <- (sum(x))^2
+        ic <- c((-b - sqrt(b^2-4*a*c)) / (2*a), 
+                (-b + sqrt(b^2-4*a*c)) / (2*a)) 
+    }
+
+    return(ic)
+}
+```
+
+```{r funcion-cubrimiento}
+calcular_cubrimiento_empirico <- function (p, nivel, n, Nrep, seed=3487){
+    cubrimiento <- numeric(length(Nrep))
+    set.seed(seed)
+    for (i in 1:Nrep){
+        datos <- rbinom(n=n, p=p, size=1)
+        intervalo <- estimar_p_intervalo(nivel, datos, p)
+        cubrimiento[i] <- (p>intervalo[1]) & (p<intervalo[2])
+    }
+    return(mean(cubrimiento))
+}
+```
+
+
+```{r simulacion}
+alpha <- 0.05
+data_1 <- expand_grid(n = c(5, 10, 30, 50, 100, 1000),
+                      p = c(0.1, 0.5)) %>%
+  rowwise() %>%
+  mutate(result = calcular_cubrimiento_empirico(p = p, nivel = 1-alpha, n = n, Nrep = 1000)) %>%
+  pivot_wider(names_from = n, values_from = result)
+
+kable(data_1, caption = "Metodo 1", format = "latex")
+```

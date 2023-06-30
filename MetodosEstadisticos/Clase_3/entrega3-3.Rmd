@@ -1,0 +1,105 @@
+---
+title: "Untitled"
+author: "MaiGM"
+date: "2023-06-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+mu = 50
+sigma = 4
+N = 1000
+X = mu + sigma*rnorm(N)
+
+```
+
+```{r}
+medias <- c()
+medianas <- c()
+media_podadas <- c()
+for (i in 1:10000){
+  mu = 50
+  sigma = 4
+  N = 1000
+  X = mu + sigma*rnorm(N)
+  
+  media <- mean(X)
+  mediana <- median(X)
+  media_podada <- mean(X, trim=0.1)
+  
+  medias <- c(medias, media)
+  medianas <- c(medianas, mediana)
+  media_podadas <- c(media_podadas, media_podada)
+}
+
+```
+
+```{r}
+
+var_medias <- var(medias)
+var_medianas <- var(medianas)
+var_media_podadas <- var(media_podadas)
+```
+
+## Student t
+
+```{r}
+eficiencias_k <- function(k){
+  medias <- c()
+medianas <- c()
+media_podadas <- c()
+for (i in 1:10000){
+  mu = 50
+  sigma = 4
+  N = 10
+  X = mu + sigma*rt(N, df=k)
+  
+  media <- mean(X)
+  mediana <- median(X)
+  media_podada <- mean(X, trim=0.1)
+  
+  medias <- c(medias, media)
+  medianas <- c(medianas, mediana)
+  media_podadas <- c(media_podadas, media_podada)
+}
+
+var_medias <- var(medias)
+var_medianas <- var(medianas)
+var_media_podadas <- var(media_podadas)
+return(c(var_medias/var_medianas, var_medias/var_media_podadas))
+}
+
+```
+
+```{r}
+eficiencias <- c()
+for (k in 1:10){
+  eff <- c(k, eficiencias_k(k))
+  eficiencias <-rbind(eficiencias, eff)
+}
+
+```
+
+```{r}
+#quartz("MailenGomezMayol_eficiencias.pdf", width = 8, height = 6)
+ks <- eficiencias[,1]
+eff_mediana <- eficiencias[,2]
+eff_media_podada <- eficiencias[,3]
+
+plot(ks, eff_mediana, col = "deepskyblue3",type = "b", pch = 19, , lwd = 2,  
+     main="Eficiencias para distintos métodos de estimación",
+     xlab="k",
+     ylab="eficiencia",
+     ylim=c(0,2))
+lines(ks, eff_media_podada, col = "firebrick", type = "b", pch = 19, lwd = 2)
+abline(h = 1, lty = 2, col = "grey")
+
+legend("topright", legend = c("Eficiencia (Mediana)","Eficiencia (Media podada)"),
+       col = c("deepskyblue3","firebrick"), lwd = 2, bg = "white")
+dev.copy2pdf(file = "plot.pdf")
+#dev.off()
+```

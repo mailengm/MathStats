@@ -1,5 +1,6 @@
 
 # Ejercicio 6b - Entrega 3
+## Estimaciones bajo el modelo uniforme
 
 ```{r}
 setwd("/home/mailen/Documents/MEM/MetodosEstadisticos/Clase_1")

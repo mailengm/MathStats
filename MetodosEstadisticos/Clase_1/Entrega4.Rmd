@@ -15,7 +15,8 @@ setwd("/home/mailen/Documents/MEM/MetodosEstadisticos/Clase_1")
 # Ejercicio 7: Simulación bajo el modelo uniforme $U[0,\theta]$
 
 
-## A.
+## A. 
+Implementar una funcion que tenga por input un valor de theta, n, Nrep y una semilla y devuelva el histograma basado en Nrep estimaciones de theta obtenidas mediante el estimador `est1_unif`
 ```{r}
 est1_unif <-function(datos){
     return(mean(datos)*2)
@@ -35,7 +36,7 @@ histograma_est1_unif<-function(tetha,n,Nrep, seed=3487){
 ```
 
 
-## B. Estimaciones para est1
+## B. 
 ```{r}
 est2_unif <-function(datos){
     return(max(datos))
@@ -53,7 +54,7 @@ histograma_est2_unif<-function(tetha,n,Nrep, seed=3487){
 }
 ```
 
-## C.
+## C.Estimaciones para est1
 ```{r hist1}
 ns = c(5, 30, 50, 100, 1000)
 seed = 5740
