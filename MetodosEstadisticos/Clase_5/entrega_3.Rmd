@@ -1,27 +1,17 @@
 ---
-title: "Document"
-author: "User"
-date: "`Sys.Date()`"
-output: html_document
+title: "Practica 5 - Entrega 3"
+author: "Mailen Gomez Mayol"
+output: pdf_document
 ---
 
-# Ejercicio 8
 ```{r imports, include=F}
 
 library(dplyr)
 library(tidyr)
 library(knitr)
 
-knitr::opts_chunk$set(echo=T)
 
-```
-
-
-
-## A.
-
-```{r estimar-ic-p}
-estimar_p_intervalo <- function(nivel, datos, p, metodo=1){
+estimar_p_intervalo <- function(nivel, datos, p, metodo){
     alpha <- 1-nivel
     mu <- mean(datos)
     z <- qnorm(1-alpha/2)
@@ -32,24 +22,21 @@ estimar_p_intervalo <- function(nivel, datos, p, metodo=1){
     if (metodo == 1) {
         ic <- c(mu-z*var/n, mu+z*var/n) 
     } else {
-        a <- n^2 + n*Z^2
-        b <- -2*n*sum(x) - Z^2*n
-        c <- (sum(x))^2
+        a <- n^2 + n*z^2
+        b <- -2*n*sum(datos) - z^2*n
+        c <- (sum(datos))^2
         ic <- c((-b - sqrt(b^2-4*a*c)) / (2*a), 
                 (-b + sqrt(b^2-4*a*c)) / (2*a)) 
     }
-
     return(ic)
 }
-```
 
-```{r funcion-cubrimiento}
-calcular_cubrimiento_empirico <- function (p, nivel, n, Nrep, seed=3487){
+calcular_cubrimiento_empirico <- function (p, nivel, n, Nrep, metodo, seed=3487){
     cubrimiento <- numeric(length(Nrep))
     set.seed(seed)
     for (i in 1:Nrep){
         datos <- rbinom(n=n, p=p, size=1)
-        intervalo <- estimar_p_intervalo(nivel, datos, p)
+        intervalo <- estimar_p_intervalo(nivel, datos, p, metodo)
         cubrimiento[i] <- (p>intervalo[1]) & (p<intervalo[2])
     }
     return(mean(cubrimiento))
@@ -57,13 +44,21 @@ calcular_cubrimiento_empirico <- function (p, nivel, n, Nrep, seed=3487){
 ```
 
 
-```{r simulacion}
+```{r simulacion, echo=F}
 alpha <- 0.05
 data_1 <- expand_grid(n = c(5, 10, 30, 50, 100, 1000),
                       p = c(0.1, 0.5)) %>%
   rowwise() %>%
-  mutate(result = calcular_cubrimiento_empirico(p = p, nivel = 1-alpha, n = n, Nrep = 1000)) %>%
+  mutate(result = calcular_cubrimiento_empirico(p = p, nivel = 1-alpha, n = n, Nrep = 1000, metodo=1)) %>%
   pivot_wider(names_from = n, values_from = result)
 
-kable(data_1, caption = "Metodo 1", format = "latex")
+kable(data_1, caption = "Metodo 1")
+cat("\n\n")
+data_2 <- expand_grid(n = c(5, 10, 30, 50, 100, 1000),
+                      p = c(0.1, 0.5)) %>%
+  rowwise() %>%
+  mutate(result = calcular_cubrimiento_empirico(p = p, nivel = 1-alpha, n = n, Nrep = 1000, metodo=2)) %>%
+  pivot_wider(names_from = n, values_from = result)
+
+kable(data_2, caption = "Metodo 2")
 ```

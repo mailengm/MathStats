@@ -1,0 +1,98 @@
+---
+title: "Simulacion-Inferencia"
+output: html_document
+date: "2023-06-10"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Simulacion
+
+
+```{r rechazo}
+rechazo <- function(n, mu, alpha){
+  muestra <- rnorm(n, mu, 1)
+  estadistico <- sqrt(n)*mean(muestra)
+  return(estadistico > qnorm(1-alpha, 0, 1))
+}
+```
+
+```{r simulacion_rechazo}
+#Datos
+Nrep = 10000
+n = 30
+mu = 0
+alpha = 0.05
+
+#Simulacion
+simulaciones_rechazo <- replicate(Nrep, rechazo(n, mu, alpha))
+
+# Alpha queda
+alpha_test <- mean(simulaciones_rechazo)
+print(alpha_test)
+```
+```{r}
+alphas <- replicate(500, mean(replicate(Nrep, rechazo(n, mu, alpha))))
+```
+
+```{r}
+boxplot(alphas)
+```
+```{r barato}
+test_barato <- function(n1, n2, mu, alpha){
+  muestra <- rnorm(n1, mu, 1)
+  estadistico <- sqrt(n1)*mean(muestra)
+  rechazo <- estadistico > qnorm(1-alpha, 0, 1)
+  if (-rechazo){
+    return(rechazo)
+  } else {
+    muestra_ext <- c(muestra, rnorm(n2, mu, 1))
+    estadistico <- sqrt(n1+n2)*mean(muestra_ext)
+    return(estadistico > qnorm(1-alpha, 0, 1))
+  }
+}
+```
+
+```{r}
+n1 <- 20
+n2 <- 10
+#Simulacion
+simulaciones_rechazo_barato <- replicate(Nrep, test_barato(n1, n-n1, mu, alpha))
+
+# Alpha queda
+alpha_test_barato <- mean(simulaciones_rechazo_barato)
+print(alpha_test_barato)
+
+```
+```{r}
+alphas_barato <- replicate(500, mean(replicate(Nrep, test_barato(n1, n-n1, mu, alpha))))
+boxplot(alphas_barato)
+```
+```{r}
+boxplot(alphas, alphas_barato)
+
+```
+```{r}
+p_valor <- function(n, mu, alpha){
+  muestra <- rnorm(n, mu, 1)
+  estadistico <- sqrt(n)*mean(muestra)
+  return (1-pnorm(estadistico, 0, 1))
+}
+```
+
+Hola
+
+```{r}
+p_valores <- replicate(Nrep, p_valor(n, mu, alpha))
+hist(p_valores)
+```
+## Potencia
+
+```{r}
+potencia <- function(n, mu,){
+  muestra <- rnorm(n, mu, 1)
+  estadistico <- sqrt(n)*(mean(muestra)-mu)
+}
+```

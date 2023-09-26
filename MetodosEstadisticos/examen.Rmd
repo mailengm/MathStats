@@ -1,0 +1,9 @@
+
+## Ejercicio 1
+
+```{r}
+mu <- 5
+sigma2 <- 13
+datos <- 5+rnorm(0,sqrt(sigma))
+
+```

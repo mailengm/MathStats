@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style type="text/css">
+@font-face {
+font-family: octicons-link;
+src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+body {
+-webkit-text-size-adjust: 100%;
+text-size-adjust: 100%;
+color: #333;
+font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 16px;
+line-height: 1.6;
+word-wrap: break-word;
+}
+a {
+background-color: transparent;
+}
+a:active,
+a:hover {
+outline: 0;
+}
+strong {
+font-weight: bold;
+}
+h1 {
+font-size: 2em;
+margin: 0.67em 0;
+}
+img {
+border: 0;
+}
+hr {
+box-sizing: content-box;
+height: 0;
+}
+pre {
+overflow: auto;
+}
+code,
+kbd,
+pre {
+font-family: monospace, monospace;
+font-size: 1em;
+}
+input {
+color: inherit;
+font: inherit;
+margin: 0;
+}
+html input[disabled] {
+cursor: default;
+}
+input {
+line-height: normal;
+}
+input[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+td,
+th {
+padding: 0;
+}
+* {
+box-sizing: border-box;
+}
+input {
+font: 13px / 1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+a {
+color: #4078c0;
+text-decoration: none;
+}
+a:hover,
+a:active {
+text-decoration: underline;
+}
+hr {
+height: 0;
+margin: 15px 0;
+overflow: hidden;
+background: transparent;
+border: 0;
+border-bottom: 1px solid #ddd;
+}
+hr:before {
+display: table;
+content: "";
+}
+hr:after {
+display: table;
+clear: both;
+content: "";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 15px;
+margin-bottom: 15px;
+line-height: 1.1;
+}
+h1 {
+font-size: 30px;
+}
+h2 {
+font-size: 21px;
+}
+h3 {
+font-size: 16px;
+}
+h4 {
+font-size: 14px;
+}
+h5 {
+font-size: 12px;
+}
+h6 {
+font-size: 11px;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code {
+font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+font-size: 12px;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+.select::-ms-expand {
+opacity: 0;
+}
+.octicon {
+font: normal normal normal 16px/1 octicons-link;
+display: inline-block;
+text-decoration: none;
+text-rendering: auto;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+.octicon-link:before {
+content: '\f05c';
+}
+.markdown-body:before {
+display: table;
+content: "";
+}
+.markdown-body:after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+display: inline-block;
+padding-right: 2px;
+margin-left: -18px;
+}
+.anchor:focus {
+outline: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1em;
+margin-bottom: 16px;
+font-weight: bold;
+line-height: 1.4;
+}
+h1 .octicon-link,
+h2 .octicon-link,
+h3 .octicon-link,
+h4 .octicon-link,
+h5 .octicon-link,
+h6 .octicon-link {
+color: #000;
+vertical-align: middle;
+visibility: hidden;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1:hover .anchor .octicon-link,
+h2:hover .anchor .octicon-link,
+h3:hover .anchor .octicon-link,
+h4:hover .anchor .octicon-link,
+h5:hover .anchor .octicon-link,
+h6:hover .anchor .octicon-link {
+visibility: visible;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2.25em;
+line-height: 1.2;
+border-bottom: 1px solid #eee;
+}
+h1 .anchor {
+line-height: 1;
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.75em;
+line-height: 1.225;
+border-bottom: 1px solid #eee;
+}
+h2 .anchor {
+line-height: 1;
+}
+h3 {
+font-size: 1.5em;
+line-height: 1.43;
+}
+h3 .anchor {
+line-height: 1.2;
+}
+h4 {
+font-size: 1.25em;
+}
+h4 .anchor {
+line-height: 1.2;
+}
+h5 {
+font-size: 1em;
+}
+h5 .anchor {
+line-height: 1.1;
+}
+h6 {
+font-size: 1em;
+color: #777;
+}
+h6 .anchor {
+line-height: 1.1;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 16px;
+}
+hr {
+height: 4px;
+padding: 0;
+margin: 16px 0;
+background-color: #e7e7e7;
+border: 0 none;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li>p {
+margin-top: 16px;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 16px;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 16px;
+margin-bottom: 16px;
+}
+blockquote {
+padding: 0 15px;
+color: #777;
+border-left: 4px solid #ddd;
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+word-break: normal;
+word-break: keep-all;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 6px 13px;
+border: 1px solid #ddd;
+}
+table tr {
+background-color: #fff;
+border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+background-color: #f8f8f8;
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+background-color: #fff;
+}
+code {
+padding: 0;
+padding-top: 0.2em;
+padding-bottom: 0.2em;
+margin: 0;
+font-size: 85%;
+background-color: rgba(0,0,0,0.04);
+border-radius: 3px;
+}
+code:before,
+code:after {
+letter-spacing: -0.2em;
+content: "\00a0";
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 100%;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 16px;
+}
+.highlight pre,
+pre {
+padding: 16px;
+overflow: auto;
+font-size: 85%;
+line-height: 1.45;
+background-color: #f7f7f7;
+border-radius: 3px;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+pre {
+word-wrap: normal;
+}
+pre code {
+display: inline;
+max-width: initial;
+padding: 0;
+margin: 0;
+overflow: initial;
+line-height: inherit;
+word-wrap: normal;
+background-color: transparent;
+border: 0;
+}
+pre code:before,
+pre code:after {
+content: normal;
+}
+kbd {
+display: inline-block;
+padding: 3px 5px;
+font-size: 11px;
+line-height: 10px;
+color: #555;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: solid 1px #ccc;
+border-bottom-color: #bbb;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #bbb;
+}
+.pl-c {
+color: #969896;
+}
+.pl-c1,
+.pl-s .pl-v {
+color: #0086b3;
+}
+.pl-e,
+.pl-en {
+color: #795da3;
+}
+.pl-s .pl-s1,
+.pl-smi {
+color: #333;
+}
+.pl-ent {
+color: #63a35c;
+}
+.pl-k {
+color: #a71d5d;
+}
+.pl-pds,
+.pl-s,
+.pl-s .pl-pse .pl-s1,
+.pl-sr,
+.pl-sr .pl-cce,
+.pl-sr .pl-sra,
+.pl-sr .pl-sre {
+color: #183691;
+}
+.pl-v {
+color: #ed6a43;
+}
+.pl-id {
+color: #b52a1d;
+}
+.pl-ii {
+background-color: #b52a1d;
+color: #f8f8f8;
+}
+.pl-sr .pl-cce {
+color: #63a35c;
+font-weight: bold;
+}
+.pl-ml {
+color: #693a17;
+}
+.pl-mh,
+.pl-mh .pl-en,
+.pl-ms {
+color: #1d3e81;
+font-weight: bold;
+}
+.pl-mq {
+color: #008080;
+}
+.pl-mi {
+color: #333;
+font-style: italic;
+}
+.pl-mb {
+color: #333;
+font-weight: bold;
+}
+.pl-md {
+background-color: #ffecec;
+color: #bd2c00;
+}
+.pl-mi1 {
+background-color: #eaffea;
+color: #55a532;
+}
+.pl-mdr {
+color: #795da3;
+font-weight: bold;
+}
+.pl-mo {
+color: #1d3e81;
+}
+kbd {
+display: inline-block;
+padding: 3px 5px;
+font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+line-height: 10px;
+color: #555;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: solid 1px #ccc;
+border-bottom-color: #bbb;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #bbb;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 3px;
+}
+.task-list-item input {
+margin: 0 0.35em 0.25em -1.6em;
+vertical-align: middle;
+}
+:checked+.radio-label {
+z-index: 1;
+position: relative;
+border-color: #4078c0;
+}
+.sourceLine {
+display: inline-block;
+}
+code .kw { color: #000000; }
+code .dt { color: #ed6a43; }
+code .dv { color: #009999; }
+code .bn { color: #009999; }
+code .fl { color: #009999; }
+code .ch { color: #009999; }
+code .st { color: #183691; }
+code .co { color: #969896; }
+code .ot { color: #0086b3; }
+code .al { color: #a61717; }
+code .fu { color: #63a35c; }
+code .er { color: #a61717; background-color: #e3d2d2; }
+code .wa { color: #000000; }
+code .cn { color: #008080; }
+code .sc { color: #008080; }
+code .vs { color: #183691; }
+code .ss { color: #183691; }
+code .im { color: #000000; }
+code .va {color: #008080; }
+code .cf { color: #000000; }
+code .op { color: #000000; }
+code .bu { color: #000000; }
+code .ex { color: #000000; }
+code .pp { color: #999999; }
+code .at { color: #008080; }
+code .do { color: #969896; }
+code .an { color: #008080; }
+code .cv { color: #008080; }
+code .in { color: #008080; }
+</style>
+<style>
+body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+  padding-top: 0px;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="tp-simulacion--inferencia-estadística">TP Simulacion -Inferencia Estadística</h1>
+<p>2023-06-10</p>
+<h1 id="trabajo-práctico---simulacion">Trabajo práctico - Simulacion</h1>
+<p>Una fuente de radiación emite partículas alfa qude acuerdo con un proceso de Poisson de intensidad <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAOBAMAAADkjZCYAAAAMFBMVEX///8AAACqqqoyMjLc3NxUVFRERES6urru7u4QEBCYmJhmZmbMzMyIiIgiIiJ2dna4zBRrAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAARklEQVQIHWNgYDJhAIEwMFnYAKI4F4BI7gQQySMBIhlmgQgmYxCpe9CBgYE9gO8CA0MxA+8DBvYZDCwiDHwHGBjyQdIMDABLcQk845HragAAAABJRU5ErkJggg==" title="\lambda" alt="\lambda" /> por segundo. Se tiene una fuerte sospecha de que el parámetro desconocido supera 0.5, y con el objetivo de confirmar dicha sospecha se medirán los tiempos entre emisiones consecutivas, obteniendo de esa manera una muestra de variables aleatorias independientes con distribución <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADcAAAATBAMAAADGyIhVAAAAMFBMVEX///8AAADc3Nx2dnYiIiJmZmZEREQQEBDMzMwyMjLu7u6YmJiIiIhUVFSqqqq6uroVnCTQAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABQElEQVQoFW2Qv0vDUBDHP0btj1gbcRBxShHchIbiqtXJQaRQcHCqCgpOCoKDQ+l/0NnpZRAROnSpii4dOjhJOylOXYuD3RxKi/fy2hrQC/e9u++H93IJ/ImKcepSljfzaycFMxttQseFGz15ECsbO9BEF2YLkKwaSDoE49I7SyL6hIfNUwh+6v5Kcl3SI4GSOopD3exJ9iU97uB+wbrYOOjV2nAmHiUFUalepiV6xAepKruQlYmobDMh1WNS9Lan8BUPWHoPOqJRpWFSHqeIhiU3+KzkyzxMBRBmsI6H0M7KwT47w3fK8EUiXjfX6oWcMo0xtLfI2UX8tl7oGr4VKZcV+bfn+czbXGMxdrnvD2pdeIVtiKR5lit/QxaSWB0Zp6MmqAZGlDGt5j/QyhlzWoWh03oPxoExH8Ns3Fumc+EHJDdJSBe9eVUAAAAASUVORK5CYII=" title="\text{Exp}(\lambda)" alt="\text{Exp}(\lambda)" /></p>
+<p>Se proponen dos alternativas, con respecto a la construcción del test de hipótesis:</p>
+<ol>
+<li><p>Armar un test de nivel exacto <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAIBAMAAADdFhi7AAAAMFBMVEX///8AAACqqqqIiIiYmJhmZmbc3Nx2dnbu7u4QEBAyMjIiIiLMzMxERES6urpUVFShAzoAAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAP0lEQVQIHWNgYDIJYwCCcIZOBgcGlgUM3DoHGDgdGLiMGRgSGxh4rzEwHGRg4C1gYOBOYHhb0MDAVvSo7XMDAP+vDGtHMefkAAAAAElFTkSuQmCC" title="\alpha" alt="\alpha" /> a partir del estadístico <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAAAyBAMAAAAuIdEGAAAAMFBMVEX///8AAACqqqoQEBBUVFR2dnYiIiJmZmbc3NyIiIju7u6YmJi6uroyMjJERETMzMz8iWy8AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACDUlEQVRIDWNgwAW4ph6qwiWHKc7N+CEIUxSnyD8Gf5xymBIzGQwwBXGK+PN4HMApiSHxgMsbQ2xUgMgQYBY0BgNBQUEZwlq4BR9AFHU7yhFWzfBQGqqIq7CBsPLFgjBFTAXIqplMQtNCywKQhYBsHsEEmEgUkLHU0ItB0WQBAwNLA0M6A9MEoBAKCBRH4U5sYFgHEljNwCXEwHEARQ7I4RVUQBZaGMAAtl6LgUmKgacBWQrE5jKUQBZiMWAFcxcwsCcwcCHLQNiKsshi/EKzoFzeAmRxGJtdEGw1jJvcAGUxKkAZDCUuQOAK5SWixCI82A82MHDpwTQg6EbhBQgOjyLIAdpAHMzAwKSLkICxuAUdYEwGhk8sBlDOFSDdi5CAsxwV4EyODfywpACiIapR3M1wFa6YYSkDw10GBm4HYCSDAhaL2SxAOSjgADI3fmDYkMXAGSYSgVX1XJhaBv6H9gz8FzMZOC5AhTDNZsqCq4YxWDdAWW0wETj9uQHOhDHYVkNYPME7YEJQmsMGTQDIZUdXBFfCBrMVkvbg4tgZT2HC3AUwFm6a/QFUjqvwAJSFh4IG34rTD4XxqIJK8QALEigQJayasxwOSKipCJtLexVMkNhZ9IAUq5QukKIankjxa9oCkSZONTfbqlAgWECcaljWI1J1NCkuYcjaBXFJAn7vQWWrG8CMo9YQGioKAGysXyWZ/+TLAAAAAElFTkSuQmCC" title="T_1=\sum_{i=1}^n X_i" alt="T_1=\sum_{i=1}^n X_i" /></p></li>
+<li><p>Armar un test de nivel <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAIBAMAAADdFhi7AAAAMFBMVEX///8AAACqqqqIiIiYmJhmZmbc3Nx2dnbu7u4QEBAyMjIiIiLMzMxERES6urpUVFShAzoAAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAP0lEQVQIHWNgYDIJYwCCcIZOBgcGlgUM3DoHGDgdGLiMGRgSGxh4rzEwHGRg4C1gYOBOYHhb0MDAVvSo7XMDAP+vDGtHMefkAAAAAElFTkSuQmCC" title="\alpha" alt="\alpha" /> asintótico a partir del estadístico <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHYAAAAoBAMAAADZDROlAAAAMFBMVEX///8AAACqqqoQEBBUVFR2dnYiIiJmZmbc3NyIiIju7u6YmJi6uroyMjLMzMxERERYDsznAAAACXBIWXMAAA7EAAAOxAGVKw4bAAACHElEQVRIDa2UP2jUUBzHv+aaSy7JpY1ttfiPbFKXIjgUbhGqYB0kWqIFl5sUHKSDdBLNgUvpIqJTQc7ZoefQxSKmNxe5wU2EHAhOh+IoiL6XNmfeL3khhP6GvPf9fH/f98jjJUCp2vF9t1TjkTYZKzNdZfp6tTUbczB+CtFXT11By4UxC1Vw1cA4LYACsQRPcOsR1gVQIIbzXcGt9XBTAAWivpgx/2SIBGhz1NDPUSLT/ZPUafYokWjbXYod6y+vOHVX0prBmxiSbUyiM5GhwwswPDQHotuHKQKqfh+CZ4ApHo39eP88oFzy7/nrHo1xba8d0B/TEUYnnqdbao7DTm8iwH0ogpE0TQbJTDK+hXEcepjnfsuDaXYByilYQRol82vJRDZ2obVh5Ln65TwqsubhkYgU0CLMv9+9QbGgj7mJfHSF1dVEbUP/1MJCInPHvQDKDtl7xDqfQDHbeJmbSeAKsIHxbjG13vXin4zmYRmIb1fOg7V+Bkb4mKx0ME60oYZALUTm4xMa4x+Pz9H/97XPYJuBDpRByB1JWXxl4wFxv+IFIx+geT3ipGTj9swqu5lRCvHpXjRgzy3Yt7pcFtVrnbj1ZZcQmbTCBrHMswTEsnHnVwZ3nFnKWhRwvYo3Ba8/TkTjWWrykF/+itWCOlUxymKT/PgrVieqGGSxL9Wjapljliy/K+ElsOWi8sbf9/trJbbIbbnoOKnsP+J+YJR8BTahAAAAAElFTkSuQmCC" title="T_2=\sqrt{n}\frac{\bar{X}-2}{2}" alt="T_2=\sqrt{n}\frac{\bar{X}-2}{2}" /></p></li>
+</ol>
+<p>El objetivo es comparar ambos métodos mediante una simulación en R para luego elegir uno de ellos y realizar el experiemnto. Para cada valor de $n {10, 30, 100, 1000} se quiere estimar el nivel empírico, y compararlo para las dos alternativas propuestas. También se desea aproximar y graficar la función potencia y comparar.</p>
+<h2 id="test-exacto">Test exacto</h2>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFUAAAARBAMAAABeEv0TAAAAMFBMVEX///8AAADu7u52dnYQEBBUVFSqqqqIiIjc3NxERETMzMwiIiJmZma6urqYmJgyMjKNFAGRAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA3ElEQVQoFWNgYDIRVWATCWLAAVCl2SUYmCbgUAkURpFmEmZgxq2UAVU6hMEAj1oGFOmF6Qr41KJIc3vgU8qAIs0jgVctivQ1GaBaNZxBAZaGmsaVEAJkpX3AYThEGirZx7DwAQMDBy61EGmIWiYDBn6gOlxqIdJMxdcOAZW3MjDwSYHVcgAjGh1DpfkYF5gxMKwUWcCwXroAZC6XHwMDFzD84BjIh0mvZIiCOhlIgdzAhuCCWUj8cgYHhCTHBrxqo3gjLsAVX/ZrYEiA8yAMJP4EpjhUSSQ5sAQaHwCeoC1X2j9sHAAAAABJRU5ErkJggg==" title="X_1, \ldots, X_n" alt="X_1, \ldots, X_n" /> muestra aleatoria con densidad <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAAAVBAMAAABRZRb3AAAAMFBMVEX///8AAACIiIiYmJiqqqoiIiLMzMzc3Ny6uroyMjLu7u52dnZEREQQEBBUVFRmZmYe41K0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABwklEQVQ4EZVSPUvEQBB9JqfJrbnzOsHqGkUQNPgBYmPw/MDqxOIQsThLwSIWgiLogVqJeoVgYRNBS0FEK5vUVoJgYXX4A0RsFLFwZrN7CSJ+PNh5b97MJtmdAP+DWftfv+4uaaFZ5KUydP4999Rto1/KbGSI53ohEpN+0jgDtt4K7PSOSb9TVaWnNFM2TCRwPOE+7rBTWpF+VVXTijXZbZHqur6+AIqhwCEbVk7aKTeqotlTQtOdFsRm/gFiSpBKRa9xfFW1a0po+tCCeBgvxmg4AYirowr7GVpbr5vvwC2nCcwHQGFEGlaIZXvwskKJ40qnEWjyFt0ZIEd5yxPjXFYyLrJ5uyJ1HDJl8OxXAQPzAT3jIa5JNVnFAJr9L+4x5TT7Bba7OcxyiJHqaMVcQY+n7m+TotmfsnHA4ZZDjD1Mi9Y41YrfQLOnK7GtNuSjbfHZ7CraRU43x/xI0vGQDjBgzpo+6LaS2A2w5JeQKidN0ve0iiEMD2sTO+M0UbqVBOjYzvna6FDCYskfwLO3apQwnEDSz8E+qcnZAzeqcf3nDVG1Yb/Mp1kGNlQ7/Se/w+zTPbYnlVmW9Pfgy1brLxs+Af2wVYT/cqGTAAAAAElFTkSuQmCC" title="f_\lambda (x) = \lambda e^{-\lambda x}" alt="f_\lambda (x) = \lambda e^{-\lambda x}" /></p>
+<p>Proponemos un test UMP con</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF8AAAAQBAMAAACCbL5/AAAAMFBMVEX///8AAAB2dnYiIiJmZmaqqqru7u4QEBC6urpEREQyMjJUVFSIiIiYmJjMzMzc3NywHBXKAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABgklEQVQoFZVRPywDYRT/tdK60/bO0NhQJSI2k0Wkq+10EU2Hi9h1FcSZmobhCEMXLlYRHRlEhTAIacwd2hgsHa5zF++9+5NKF37De7/3+9573/feB2A6bWwszqEPBbcvGKSqDVz9khOkBNhicvRpkdUvmxccRerAOJMQylhIN8+Jag5uyOkLO3J1uwVlMswQsheEPc6HauCZnG548iMQLXk0sCs+qTwIibRQJhIU3FGLmp/xLXeibUq8PuvJbVcU/V1GwXY2O9XwC3pe5rDEXy++ekAF1ClexzIp+gRAY3SK/im7gsM2esaWQNlUw+C3pkYBGsNOSVeRYx/eEpLXEqLbwqop9JVswgGqUGqaLRKbQyx5PHZiMolYWCM3ZHBnDGeAXSRzWokCgeLgKaCnLjG1gTdyI648qWvxGNGczgUydNlEl/MY2j0ZxaaP65kpM75Pkx3fxufTln+DrJVWoWY4O0Qxb4GOmjNBH2pSozb/gtO3pT8VdvIDaZUqIfiL4PQHKwxlqNZZMFIAAAAASUVORK5CYII=" title=" H_0: \lambda \leq 0.5 " alt=" H_0: \lambda \leq 0.5 " /></p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF8AAAAQBAMAAACCbL5/AAAAMFBMVEX///8AAAB2dnYiIiJmZmaqqqru7u4QEBC6urpEREQyMjJUVFSIiIiYmJjMzMzc3NywHBXKAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABeElEQVQoFXVRPUjDQBT+orRNLDEOxU2t1UGcdHIRdxeJggjFIZTq5OAqWowuHXSIg4OgGFwdFHGoi1QUHEQpzh2aybVZXLr47t2lJNh+w73vfe/v3h2AqZxdWphBDMV2zPlPDQ+4TchZUhI4/XbJt26a10LW6sCYIF3oo13KZNjHHRFrfp9HBy3oE8mMCrvbkWjYeBMFthRegIHdKCbtMpvyilK1FqpEo4InwLhXoR+eicBhv1STctBmxfrkVbBXKEw2VEFHZmaUb16xfkQF1CldxxL51jhAa2x5HJNH0VeO/uAQo2yqERB3NUcAWmPdF4JE6qv7CClqh7CFVYdD73RmfeCCBpGJcIJFRfVH0VlzsUFm0BadkckDB4kC3ccrBQjmJRujgQ8iQ22+UujyGnICL111EPKVd845H7pHH9dxTCd9SF9wVkvP5qjIF0F+VnoKI09O+VlIAptrrgg1p7mP1OI7SAW/yvY21lxvva96XImN65sF/AG+el2tYBt9XQAAAABJRU5ErkJggg==" title=" H_1: \lambda &gt; 0.5 " alt=" H_1: \lambda &gt; 0.5 " /></p>
+<p>De la definición de <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAATBAMAAAAQbVIwAAAAMFBMVEX///8AAACIiIiYmJiqqqoiIiLMzMzc3Ny6uroyMjLu7u52dnZEREQQEBBUVFRmZmYe41K0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA/UlEQVQYGT2PK08DQRSFP3YKs12Wphq1sgoaHppJCFTiGlK1SJKKNSQQEiABFAIEDrMkIJH4ahQKUbXhFxAMCYo7d6ZMcu8559u784D/lRVqkwCSDdVOSNmX6tqOSi9AtlWHxyp3Eba92q6mVj/CRSemFUbyKsK0gez14cLHJamrn8tfeBeXh//mYcGN+/vQ9SMlpoETSDioZWIq8FFqCIcirPg2krqWWoVnn+9983v6ry96UGqXKQL8FJg72jWbZmQq7ETAh9TehMRxOrjZBSNnZXIDU0yxDWHlNemThC2+4S3CM5i7Lf0uR3AeobzJrEdP6tSZUmXWKjUW/gCzJCs0r4W0cwAAAABJRU5ErkJggg==" title="f_\lambda(x)" alt="f_\lambda(x)" /> tenemos que <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAATBAMAAAD185dcAAAAMFBMVEX///8AAACqqqqYmJjc3NxUVFR2dnaIiIgyMjLu7u7MzMwiIiK6urpEREQQEBBmZmZdX+wcAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABLElEQVQoFX1PsUrEQBB9LivRy16uucb6BM9O1Mpqr7AUAofXCXJfcFhqk8JCu3SWmj9IJ1ipcGAlFiJYCIKVnY2l4Iy7IyZ78cHum3nvZTIL/ODM0cTRP3cK9C1wPjuijkWProH5B0CtiVLlPWkXqDBLdGWiVPkm932P+Y3O2As1SuRPj2x80ZnWEr7t0FpQ68t4ZaGg+QkXIVq81hAjlOzx/DkuPncJI65+QWtFGVZ1xkqf7oSmzoA6oRk0p0URqMMuEFeC5oVBgZXCYkDWYknBKS6bdjRpPEFBOX6MyXDkg8GOd4hKxBabOAXucwwsdmh0APMO3YUe93IcAFdAex8bQYqE+AJ4csa2+M9SNHDbP1anDQGR9YerOv4D0UO+ddJW6NQU7Xpbk/+038w9No2uKZBNAAAAAElFTkSuQmCC" title="c(\lambda)= - \lambda" alt="c(\lambda)= - \lambda" /> es una función decreciente. Por lo tanto el test queda definido como</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAA3BAMAAADXtEpkAAAAMFBMVEX///8AAACIiIhUVFQQEBBERETMzMy6urp2dnYiIiLc3NxmZmaYmJju7u6qqqoyMjK8Fi/+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEz0lEQVRYCeVZX2hbVRj/5aa5uclyk2Yr7RrRdnOgoo4WxyZFIQX1QRSyh6oMnTfQyoYPjbiKTzPDzfmgI4pMNojeOXyauEZfJ4SK4DZWbx/E9WEzLfggSts3FSZ4/txz7r25aXKrue2DH+R8v+/P+X73fjk5NycBAsjJADmhpfx8PrTSAQr/ZQVICitF6w+rcpC6C4UgWWHlLNU3VFm///g3G5rQPvmE0T7Ooz1DExMTL49nK6mIcSbIhIA5wdjTO2k5/dd+TGG/U1k/ucNK9z3uOBhSDwZeyJz9LcNb4arXBGol5nkQu5F3xZQcdHvh3HLcxxzYATH2z4qGN+11rwkknmUeDfvjY/xCmK3vhGanXhyTc96WqBPg9x4xOuQlh1iCjoL+mDt1H8rCvPS8QHcE6KgDsmOp3LJUcdl5j28etlOCbyF+9tTKd+pBs5krOtDsYXbiaZdb4Tcd71XnXN520M9+BFFETN+cj5ybdMW25YiRrtue1CcUaIVXJm1HJ+VnXzXVVuxFe217Cx6/y23PsJ0o807pttvbBvvZo31jgj1O9piJiTqbrrViVxv7XLVX32dGRC4/V6w19LPjy1GrRecv8/l2l2/za/kCxTrwLQ/9MMz1a0dIcO9pnVttRz/7NWxrtGA/5CmzskZNvYzMGlIJi+JTDeoicgofq9FSIsUt6MM2gCKA1DZ7STpwHZrhZ4+6MkhukrFfBFLk48XaMiMT7uBs+igSN0javU+CrOHLHwyOZMY/hT7rsHDE2G+O/mnIwNz8vFpzbeY88B5TScvuMmOf6jMwPTgMHpMFqlhuXEdmGFCNOHAf0EP2qq9I/HeZY4Oa0expaaf5ZUdTiVvvErH4vdup1bpvzm9YNAh7mQRIl+LZcrpAYIa8PDJqecz1jM9ZQH+Bd1l03s6+YvqmafMrp4nzvL0Z1PoXKY/WaEo812S3NvW/qf+nEznRZc+9szkz9MMp9lpR5QEgZhIjMfgHGREfoaMjye0OboNiWS4VVG/wzlfaZMuQsqeMHmqp2TXmzLNRDrEmWwbWA3aX33zGXC/D5X9OqyDB7Bp/TPQS4+tHiDzKvLsMpsIZlFm1114o5/osysG/JQg25SmBwtARM9mLaVo5ei07QnWVDlKOsSuSZpfBJNQKFmnRX7DrHqrzdJCinJUwBHAUWp2tumQVMdb6PGFxv+9mCKyiZAI/kh2GtDdTgp4tkF2CvNwSq7itLuPkmYcBpYHV8Q+RGR8qIFX3MqjBPu/eSRuykiNOesxyMENPNNndN19ySpJnolcC7vPeSRuyLjnZ7IuXYwLsCRt/iD4SXHLVhf8rjDdEhZQhkNCMfRoZUziY9p1lPNENGqbITwogNWM/DGVWejYTMPZ+xPObSSq5KLuag3q39MizzFRu/gCwPFeSoa4Dyh4n7PRMwkWeZfTtmIRSxhUR6b62751cgBDnLDOABWvBwgUR6b6m7Ml+pJ3OO2eZHCLWEhAJr/WUHQNI54myRZ5lNon9RSgjghvOWYayX7BQtGSs24Dd+4x7t3HOMjksmFqZnQO6TWvXY+zpva6dVp5lXt3xRu0A5r5vhERNyjL28Mp3qPx/Zl+qd2hOqOGFtVDLdyi+tb/PY0v/m8DW/i+DPR3em38d/gfAbhF3do7NwwAAAABJRU5ErkJggg==" title="
+\delta (\mathbf{X})=
+\begin{cases}
+1 &amp; \text{si }-\sum_{i=1}^nX_i \geq k_\alpha \\
+0 &amp; \text{si no}
+\end{cases}
+" alt="
+ \delta (\mathbf{X})=
+\begin{cases}
+1 &amp; \text{si }-\sum_{i=1}^nX_i \geq k_\alpha \\
+0 &amp; \text{si no}
+\end{cases}
+" /></p>
+<p>Nos falta definir <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAMFBMVEX///8AAADMzMxERETu7u66uroQEBB2dnZUVFQyMjKYmJiIiIiqqqoiIiJmZmbc3NzgvkUbAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAa0lEQVQIHWNgMnRggIAwKM1QAWPMgjGEoAxWAabVYCa7gZIamMFZFODDsALIZDQFErwKDAyB6gYMDNwPGBiKGa4yMbAkMDDMYrjEw8Bgw8BwheH0AQaex0CFILCazQFMcz3g2wBmfGbgvwAAlPMR/4Z0BpgAAAAASUVORK5CYII=" title="k_\lambda" alt="k_\lambda" />. Para eso buscamos <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAIBAMAAADdFhi7AAAAMFBMVEX///8AAACqqqqIiIiYmJhmZmbc3Nx2dnbu7u4QEBAyMjIiIiLMzMxERES6urpUVFShAzoAAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAP0lEQVQIHWNgYDIJYwCCcIZOBgcGlgUM3DoHGDgdGLiMGRgSGxh4rzEwHGRg4C1gYOBOYHhb0MDAVvSo7XMDAP+vDGtHMefkAAAAAElFTkSuQmCC" title="\alpha" alt="\alpha" /> tal que <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALgAAAA3BAMAAABN+535AAAAMFBMVEX///8AAAB2dnYiIiJmZmZERETMzMxUVFSqqqrc3NyYmJju7u4QEBC6urqIiIgyMjLIDMfUAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEmElEQVRYCbVYPWwcRRR+vvOtd29vfV5+AwS0MTEgQnENFATQWSIFUHCWiJQGtEYKoqBwChL+JPYCFKQAW4gGBbFWiCJcWHYIEopSnIuASJDwFSgUKc4QRARSSJBoUgDvze7szOzP7KbgFTPf+743b+dm386MDaC3w3q5SLV6RYrEOx3JuRE4XSH4jF8hKC+kHeSxKveC6to///SMyhR51ndFSsI7gwQy0BzzH1CZQm+mUOFCPeQo7vfDwRRT5LY2ixTO/8IB76/AgMOSfrK0FM6lMxx0Xi+dUTwmMzaVy7wrRUDPfiNNFfnPFgkx3+6VBOjk4aJOBVgK9LpWbXlaGbb0sl4dH+j1v/WyXjVv0+r2TVq5RLTv0QaYd2vlMvGsNqCmVOLG9u/JNlzXrVbqb2mTNzqyvHxr5Fkn3GoVuqWtxZaSpOGG8bNO3SE/tBD3g0IJhfWurNobSc53Zb4Qz49QuveWnXv9vJB5T2GHN3O3tobo5Mab0P+WkGTGnCDY3BoLYCaTkgKhH8oe1Nyu4uOafhURtsh4UYSM9RCPhWDfKTiBljcFJnRtm+Kve+BFhHVokSv3cwDQ6iCe98FQh8UBO3wRSeiMm+Qgd2JQo47M2rMZAbge99jVp7BZBhg/LziBZn2BCZnuVZkwtv2RuPZMEGHpm29T8lcBLvqRpLazi6oPs+p+8Jis/xlSsDNlrPJBLPnZlSu7OKH0B9YUF3+o+m2qDz8WYHSt99IrfFADZ26xHeRETBmXR7hK7z9Fbia55crL5/S7GHSEItGc52gq7fs2v4Y4VwN3jyY+ACflY4PWgBV8VdtDwqxmnb1kzMfXczvxsb08MeAQ38dflBvGnsem7mODWTD5xFVCk11qAS7AfnxehDMzhwmpqqzQEAXc/CcaMnyxl+Simdc94u0BtQCXANes9rtHOJu8zXjS8AsF+BfnscDwPkYBzMDjBs9FyZcCJuyDk9PT07t2wlF8DfAgceoLI+YQNZFZmHXZh3A3ug4tBrPr8IgJED0Kq6U29xrR5p5IZTMHOE5eus5hkq0gCzTmvgHj2hNgCYr43fBBwHOxUmTBq6011l+AHwGX/T1ydviMEs07UYwgcAVD2YtwnIt9ocQ0u+MjtixtWLHgE3iayPTeYuTcXOunKVIxykUE21sIfAxWh3owLnuNwFwdER6G1Ao7uikwR+NfIIrKNYg5novtijwu0y95KvUod2scaPv1BZ2snkTQ8Hjw5xxo+3lPJ6d+V1xPAKeqXTn6gS65evrHdWh/etwd6EYl2tZiAnOAem8Z4oUlNi8nOEsdyFIS4yg//9KTia1JQcXwh2KJFPVs0Mdm1JK7IjycGXEDRMkt9/+9n68HykyPMM9m+44i5Dqtbi6dkHhdypr5YZbLY4Z+His4c0pggT4TUIfe1omknZMDokMHoGJy6USUswh8TEDAQ4dtyhWTNwfy2Dys/O3PD51qM28FeQllzhlIHj90qiX/VRpZAOX/t9RPR8vyUUGsQts5p5YSgM6XvmDYoYPHzkN0+JRZY1QWgadepzwmN+K3XDZFHk75Fd3ov3P/ATlb2fiKuoj4AAAAAElFTkSuQmCC" title="P_{\lambda=0.5}\left(-\sum_{i=1}^n X_i \geq k_\lambda\right)" alt="P_{\lambda=0.5}\left(-\sum_{i=1}^n X_i \geq k_\lambda\right)" />.</p>
+<p>Sabemos que <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAAAyBAMAAABBvE9uAAAAMFBMVEX///8AAADu7u6IiIh2dna6urqqqqpmZmaYmJjMzMxERERUVFQQEBDc3NwiIiIyMjJwun12AAAACXBIWXMAAA7EAAAOxAGVKw4bAAADFklEQVRIDe1WTWgTQRh9JJs0m3RSt2ix1upKiy3WQ/WgFhVCUUEUSS+CeDC1YIuH2noRBGHrRVHEiOB5Ba+FUE/qJakeKirEQ/FQ0VAvHjyk3jwU/b752aStonRzUXww8733fTMvM7O70wKErqOjLsfQ8NqtXGgTNrD9VL4hRtH+5ob4IJU/O98QpyT6vIYY/Tf5206gtPU1o+Q4TjbU2qe2qOnituOHMko6np7f0xnKKFIK5o/+zqhr7YAJmYpyP7TNlC2XWHdpBsOvmNUgjhD6gUItpZnIIL4MRNjPcpSrGbSnjF2Gm5hqxc4iolmjKca+sbDKwFOKYyyW2rgPsCODTCA0sTYAh9FSlxYD7ayS1IZcqNJuh2xrSBWtmtCMjebVzwY1aXSfZLNHK8sRiTtV6gPYbXsDbggb2Zg2UkZpdI1ok08bLXBuciP3Ab6UA2oIGwFFYOT6zSc6KY18EnYrdUVqSK98pycDo/EXVD1PTRlVIM7M4SJPIbBRzGM2R03+knBmWWvEhieI8WOwlxd8yJOXRqKKeKKCg3ocG6Vc6uLfqVMOUx1EDR6kipo2ubgK+KSkkV2l88jgsa5KI+Yj92gLizKbqnsBhGdv1kObaOJ0X46UNIpU6AllYT4ENrpALVZI9+szQkuGEhrdAC01USCZoHboOefVGRWBt4hXs5xRZ8SjziFaMUbPuKAgqDaVh6eWarLK6CtwlzbniRnOb6IvgwbHZiE6IXxORavcS9gPX8Je+gQ62DqIUx2DJPcBB2Afc+058jix/TgSWXrkeeAREh4PH3e5XwHLWyGVWDC5uCb8gSgkXYr2G63qQrq3ThgqR7MwRu9MBfI33tMCV6PpzuoMaTGhkzkdB3QELjP7bOTaj9VUdDytY05HX0ck6KCQzBh5w5BfRbGqUDZaFujlVeihBxoC+tlH5m85xRA2dL/RHzSNTCij/VcCuKGM/unJY3J3EXOFht1r/FJYBzP/oyHrjfIypMmhjbzFbvoXYTC8kbkMQ6/I8tShhDZK96qtfVB+6+/1ZRg7+bNL8c9tfwC8NJClDxPkkwAAAABJRU5ErkJggg==" title="\sum_{i=1}^n X_i \sim \Gamma(n, 1/\lambda)" alt="\sum_{i=1}^n X_i \sim \Gamma(n, 1/\lambda)" />. Por lo tanto podemos definir</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAAAyBAMAAAD1trlhAAAAMFBMVEX///8AAACIiIh2dnZmZmZERESqqqrc3Nzu7u6YmJgiIiLMzMwQEBAyMjK6urpUVFT5mSWsAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAD4klEQVRYCe1WTYgcRRT+0rPTPzM7M9tsNJpdzIC56EIYHUEEkZEYiIJhTiEXoZUlJsGF3kRQQTelBFER7KAB9bLR04oeejG5ZWH3FBdCmHiTXCYIe5LdDUHxEIiv/npqugeyDj23fTD13vveV+/VVFVXFZCST16aZSkodzeaKgS5J00lLLdrcQrK3bXq47nnTCesxVsLaSxvv4ivorxz7ubbnYFRz8Da9A0ua77vd0dV6+IjMrOz6LfzqGF/3cqkKfr687uwLxMcAjiLe5le7lqSejYT7Afcer9v9bvSW8ElA54LhXNnv8YKDHBfPMDs6X81JPW5ZrP5LFDrR+G2UoB0m1I9eSSgLnL+C35LgrK19sHNLMxd5r4DHDJ41nPHgdMGkJjukjALofs4UH1M4rceTeJkuJMomL6wnwGsEB0Dfx4fR6gYQGKqq6gU4zXC1iX+pS8nTbHuo5HwtUE1nK4daZf0zxi7jEJAVlpmHIGMR6BeOCLDtm8OEMtvMYkbLWfHRXMo6yhMoLptcJRZ7SZb4Q2ClpnEX55UcaFK101P2rwG6K60n/p8MVbhIo1sVdlSnb4NLMz7OpszRTD9HSGlvi98LNnL9i8NSsuII2qUKMO1yG7LTpiPgQmyxx5wISbC14FIRUlVuD3XkYDj/9aLYGMvOWLuV977G3IDiBofAcH3sLYV9w/SZj9yl0NPBbl6gX72jB7xxQO9UDm4r52jGGujyD1RY4WMw6jVOUC1+SjlNhU+b0r1ILHhccIWflRIzdi9H2CZB7m0aFu8/w+3RI0vyLiJPSEHgO94s8qbnhRuMyTn1QY8VDt4WoUrjYTnNlDpAIscoFrWjTq3RA1ac2cCc1UOoBrw8CpZvfVAmVZZn1flY5uz+IthPuR04IFUvD0PeFPwSqwHkSVqVBi8Dg57OE/BK5sbLTjtPhYc+rL1eTXu+3vpK0KxIThWJ6FenY6xsr8OWl9Dzv1wj9F/CmBF+PUUrkUA3TctOeUGz6I9AjQHPZ/PUIKU8D2RFmdbI4EyikwjUtffJO0uDXg+lwd8dEs01Iyc0EigDJpYUyy2J6CjNh7wfP6waxKl/WqYxfCuwmwdO6oNqd+mvc4w4wx4Pv+kmdnzVkekpr0kRNfwYumrttyF+3tE51X2+awWnojf9HUZ4KT+nDxgUzw6r7LPZ3X6AheeSNFzc9XGdRcu+au5JU0lukMPKyWNVCg39+AribDcku4mGn4G1HPj0/bwKXba82Rnp8zhec4oa4grj664EdbwSp/Ri7nJRllDX3kjraGuvJHWWPpWztXl4ffLQ3uqK+/P9fCh1P9B+A+GlchvkiWQEwAAAABJRU5ErkJggg==" title=" 2\lambda \sum_{i=1}^n X_i \sim \Gamma(n, 2) = \chi^2_{2n} " alt=" 2\lambda \sum_{i=1}^n X_i \sim \Gamma(n, 2) = \chi^2_{2n} " /></p>
+<p>Por lo tanto,</p>
+<p><img src="data:image/png;base64,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" title=" P_{\lambda=0.5}\left( 2\lambda \sum_{i=1}^n X_i \leq 2\lambda k_\alpha\right) = P(U \leq k&#39;_\alpha) = \alpha " alt=" P_{\lambda=0.5}\left( 2\lambda \sum_{i=1}^n X_i \leq 2\lambda k_\alpha\right) = P(U \leq k&#39;_\alpha) = \alpha " /></p>
+<p>con <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJ8AAAAyBAMAAACwtxTjAAAAMFBMVEX///8AAADc3Nx2dnYQEBDMzMxERERUVFTu7u5mZma6urqYmJiIiIgyMjIiIiKqqqo/DGXFAAAACXBIWXMAAA7EAAAOxAGVKw4bAAADIElEQVRIDe1WTWgTURD+3HTN/sRstxZ/kW7w4EEs0Sq0iNhiRbEeUpCiXtzqyZOtUhVESK3oIVjSS2lvUfBSkW69ihBRsKBCrEcRKij00EN7EaEqzu57u9ltMJuEPXYgb2a++Wb27Xs7Lw8IFenN7FQoqR6CuilzvB5+OHcAI+Gkehgf0F0PPZw7olwvhLPqYJjSnTrYG9SNFWjSex3RdX1XJKuh6iars394W0jBta4QAgsP7uY0acKomiAU4+mqBB68r7t1tHxVvlhSTYewt/cIBrZnKsjaggMp+qIb6iRjrOc2Vk9lXSigY3yGJwAp+PBE1zVi3mTsgzsDWa8NPAgAZWc869gC7Z4SnOAhjFrAYxbfoq+Uc4DRNNJ+32fzQ1NtBhI+mMwfkBeBJipKIvW0OJoP8e6Y3/XZiYzhePESsI7Thxg9RTYZe3UP02wU2+b9rs+eQdHxmtJAzoc75mZ6iriDobJOjLJ8N8o2t7RXGQhPdM5LFYCndkS+ZQtLTmUI6LNRkm+BHpkwHJCGv7Sd+EU/QS5BdVHMkVX0PG58Ia195U6qNcstUspqnsY1+okL+0ywHRJbYBHC5C6ptOtwHbPDv/sN5qr6EMdJXYp3c0fOYhIwHW9Z4yCpq/SsAmm/vCRHGUoWOTa84gUFS3R7UaZVuvyQhY6dp1nzXp52N7m8hsoKvcFzJBZ5nc9ePYwBtBKqPWV71d6eZaF+2hW3l9sh2T3llwszs3nlNAT+AcbLbyyQOZeBteSnk52y4PWyeOPouih6dD2fzABXWOCjFxcHT0L8tAyh5EHMeGeSjnXWdgnS1k+HUq1gwYTWTMB4rrZL0DkjmE1eMheE5tFGwAhqugQJZ4LJtie/CGCagUkJ1Ms1XYKS3uulA1V8zkXg0XtQL9d0CeI7Q59J3lej0hSol2u5BLlnDqSJQmWVBhD+zdx7NtjaQHZlikJ/yFy2VkYbQBLTnkw1kL6R4qyAfTjTf99PR0U3aH+iq8UqHYiqoHM4U7HIClpLYx0dHZ3RFXQP58hm6B7OkRVM5tgrt0e1KfxwVg4HD+n/l/8HVW+YotfabfsAAAAASUVORK5CYII=" title="U = 2 \lambda \sum_{i=1}^n X_i \sim \chi^2_{2n}" alt="U = 2 \lambda \sum_{i=1}^n X_i \sim \chi^2_{2n}" />.</p>
+<p>Finalmente <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAE8AAAAYBAMAAABJkb36AAAAMFBMVEX///8AAADMzMxERETu7u66uroQEBB2dnZUVFQyMjKYmJiIiIiqqqoiIiJmZmbc3NzgvkUbAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABeklEQVQoFXWRP0vDUBTFT0NKbJua1lkw/p+EODi5ZHFQLMRBJ0G/gUUtqIhDQRQXO9elg4so0kFQ1KFOBS1Sii66FHRwkvoNvEna5OalfZDcc37nJnl5F+i9ng96ZzzRyn1Z7m2d1EVCXirEDYalaRN4YoBJJfDGFUp+WcpkxmQGO2Q2OPB13pekirQbvhc/TOgt3wADgGJx4OlllD0NRFPSpcy8I9ULHdpaOp1lgWKMTHTszzGtI3JafwHxDm3X2Ka1KCCy0hBKAo3MCMC1n6qIlyYNEdl+dwwIznoL71Kn09sjMEx/E5x1EY3QV+jBv5I46ze8VPCYE0/ozt6Qsn27+k01UbVMKkCflRQOI6GmiGcWIvo+1UPUS1SAKSTPHeHdbjBIOo9RuiDV8WE60TViZa/HFmoLXzJo1g9YB+JNnLnxKzK6q9r3cWD+HjTrfPTUaqlNueEGylUtF2h0jEazNuQTzGKvVrXCeYh0O71Qkw3mutIusOKwf1BbSQwJK0aiAAAAAElFTkSuQmCC" title="k&#39;_{\alpha} = \chi^2_{2n, \alpha}" alt="k&#39;_{\alpha} = \chi^2_{2n, \alpha}" /> y el test queda como</p>
+<p><img src="data:image/png;base64,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" title="
+\delta (\mathbf{X})=
+\begin{cases}
+1 &amp; \text{si }2\lambda\sum_{i=1}^nX_i \leq \chi^2_{2n, \alpha} \\
+0 &amp; \text{si no}
+\end{cases}
+" alt="
+ \delta (\mathbf{X})=
+\begin{cases}
+1 &amp; \text{si }2\lambda\sum_{i=1}^nX_i \leq \chi^2_{2n, \alpha} \\
+0 &amp; \text{si no}
+\end{cases}
+" /></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>rechazo_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(n, lambda, alpha){</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  muestra &lt;-<span class="st"> </span><span class="kw">rexp</span>(n, <span class="dt">rate=</span>lambda)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>  T_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sum</span>(muestra)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  <span class="kw">return</span>(<span class="dv">2</span><span class="op">*</span>lambda<span class="op">*</span>T_<span class="dv">1</span> <span class="op">&lt;</span><span class="st"> </span><span class="kw">qgamma</span>(alpha, <span class="dt">shape=</span>n, <span class="dt">rate=</span>lambda))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="co">#Datos</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>Nrep =<span class="st"> </span><span class="dv">10000</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>n =<span class="st"> </span><span class="dv">30</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>lambda =<span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>alpha =<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">#Simulacion</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>simulaciones_rechazo &lt;-<span class="st"> </span><span class="kw">replicate</span>(Nrep, <span class="kw">rechazo_1</span>(n, lambda, alpha))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co"># Alpha queda</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>alpha_test &lt;-<span class="st"> </span><span class="kw">mean</span>(simulaciones_rechazo)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="kw">print</span>(alpha_test)</span></code></pre></div>
+<pre><code>## [1] 0.0534
+</code></pre>
+
+</body>
+</html>

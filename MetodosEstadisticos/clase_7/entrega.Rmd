@@ -1,0 +1,64 @@
+---
+title: "Ejercicio 1 Práctica 7"
+author: "Mailén Gómez Mayol"
+date: ""
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Ejercicio 6: Elipsoide de confianza para el peso y la altura de indígenas peruanos. </h1> </center>
+
+
+Supongamos que los datos proporcionados son una realización de una muestra aleatoria normal multivariada. Graficar un elipsoide de confianza de nivel 95% para el peso y la altura medios de los indígenas peruanos y graficarlo.
+
+
+```{r echo=T}
+datos <- read.table("datos7.txt", header = T)
+```
+
+
+```{r echo=T}
+dims <- dim(datos)
+nivel <- 0.95
+
+n <- dims[1]
+p <- dims[2]
+
+medias <- c(mean(datos[,1]), mean(datos[,2]))
+
+S <- cov(datos)
+A <- solve(S)
+eig <- eigen(A)
+avectores <- eig$vectors
+avalores <- eig$values
+
+```
+
+```{r echo=T}
+x1 <- vector()
+x2 <- vector()
+f_alpha <- qf(1-nivel, p, n-p)
+c <- f_alpha * p * (n-1) / (n * (n-p))
+
+puntos <- seq(0, 2*pi, 2*pi/500)
+for (i in 1:length(puntos)) {
+  y1<-(c/sqrt(avalores[1]))*cos(puntos[i])
+  y2<-(c/sqrt(avalores[2]))*sin(puntos[i])
+  V<-avectores%*%c(y1,y2)
+  x1[i]<-V[1]
+  x2[i]<-V[2]
+}
+
+x1 <- x1 + rep(medias[1],length(x1))# x1+1
+x2 <- x2 + rep(medias[2],length(x2))# x2+1
+```
+
+```{r echo=T}
+plot(x1,x2, pch=16,
+     main="Intervalo de confianza del 95%",
+     xlab="Altura", ylab="Peso")
+points(medias[1], medias[2], pch=3, col="steelblue")
+```
